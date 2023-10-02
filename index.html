@@ -23,14 +23,13 @@
   <body>
     <header class="container container--size-l">
       <div class="header__wrapper">
-        <div class="quote">
-          <blockquote>
-            <p>
-              "- And so the lion fell in love with the lamb… - What a stupid
-              lamb! - What a sick, masochistic lion."
-            </p>
+        <div>
+          <blockquote class="quote">
+            <p>- And so the lion fell in love with the lamb…</p>
+            <p>- What a stupid lamb!</p>
+            <p>- What a sick, masochistic lion.</p>
           </blockquote>
-          <p>— Stephenie Meyer, <cite>Twilight</cite></p>
+          <p class="quote__author">— Stephenie Meyer, <cite>Twilight</cite></p>
         </div>
         <div class="img__wrapper">
           <img
@@ -41,18 +40,20 @@
         </div>
       </div>
     </header>
+
     <section class="main-screen container">
       <div class="main-screen__wrapper">
-        <div class="main-screen__rules">
-          <p class="main-screen__history">
-            About three things I was absolutely positive. First, Edward was a
-            vampire. Second, there was a part of him—and I didn't know how
-            dominant that part might be—that thirsted for my blood. And third, I
-            was unconditionally and irrevocably in love with him
-          </p>
+        <p class="main-screen_rule">
+          "About three things I was absolutely positive. First, Edward was a
+          vampire. Second, there was a part of him—and I didn't know how
+          dominant that part might be—that thirsted for my blood. And third, I
+          was unconditionally and irrevocably in love with him."
+        </p>
+        <div class="img__wrapper">
+          <img src="./img/bella-swan.png" alt="Character image" />
         </div>
-        <button class="btn btn-start">Ready To Play</button>
       </div>
+      <button class="btn btn-continue">Continue</button>
     </section>
 
     <section class="game game-screen hidden">
@@ -60,10 +61,7 @@
         <div class="game__grid"></div>
         <div class="game__edward-img">
           <div class="img__wrapper">
-            <img
-              class="twilight-img"
-              src="/img/edward-cullen-twilight-png.png"
-            />
+            <img src="/img/edward-cullen-twilight-png.png" alt="Edward Image" />
           </div>
         </div>
       </div>

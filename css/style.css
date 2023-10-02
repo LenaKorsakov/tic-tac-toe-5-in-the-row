@@ -69,7 +69,7 @@ body {
   --light-green: #09898a;
   --violet: #484e79;
   --brown: #503a2c;
-  --white: #fff;
+  --white: #e9f6e9;
 }
 
 * {
@@ -97,32 +97,19 @@ body {
   width: 100%;
   height: 100%;
   overflow-wrap: break-word;
-  /* background-image: url(../img/Forest-wallpaper-twilight-series-7768791-847-479.jpeg); */
-  /* background: transparent
-    url(../img/Forest-wallpaper-twilight-series-7768791-847-479.jpeg) no-repeat
-    center / cover; */
-  background: linear-gradient(
+
+  /* background: linear-gradient(
     0deg,
     var(--main-color) 0%,
     var(--dark-green) 100%
-  );
+  ); */
+  background: var(--main-color) url(../img/forest-silhouette.png) no-repeat
+    bottom/contain;
 }
 
 .hidden {
   display: none;
 }
-
-/* blockquote {
-  position: relative;
-}
-
-blockquote::before {
-  content: '“';
-  position: absolute;
-  left: 5rem;
-  top: 5rem;
-  font-family: sans-serif;
-} */
 
 .container {
   --container-offset: 32px;
@@ -166,26 +153,41 @@ blockquote::before {
 
 .header__wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   padding: 5rem;
+  position: relative;
 
   & .quote {
     color: var(--white);
     font-size: 2rem;
     font-weight: 800;
     padding: 5px;
-    margin-bottom: 10vh;
     flex: 0 0 50vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    letter-spacing: 0.1rem;
+  }
+
+  & .quote__author {
+    font-size: 1.5rem;
+    color: var(--light-green);
   }
 
   & .twilight-img {
     height: 20vh;
   }
+}
+
+.quote {
+  position: relative;
+}
+
+.quote::before {
+  content: '“';
+  position: absolute;
+  left: -3rem;
+  top: -1rem;
+  font-family: sans-serif;
+  font-size: 6rem;
 }
 
 /* MAIN SCREEN */
@@ -195,20 +197,37 @@ blockquote::before {
   align-items: center;
 }
 
-.main-screen__wrapper {
+.main-screen {
   width: 50vw;
   height: 50vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1rem groove var(--main-color);
+  border: 1rem ridge var(--violet);
+  background: linear-gradient(
+    0deg,
+    var(--main-color) 0%,
+    var(--light-green) 100%
+  );
+}
+
+.main-screen__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & img {
+    max-width: 12vw;
+  }
 }
 
 .main-screen p {
   font-size: 2rem;
-  padding: 2rem;
+  padding: 1rem;
   color: var(--white);
+  max-width: 50vw;
+  max-height: 30vh;
 }
 
 /* GAME GRID */
@@ -233,13 +252,15 @@ blockquote::before {
 }
 
 .lion {
-  background-image: url(../img/icon/free-icon-leo-3268525.png);
   background: transparent url(../img/icon/free-icon-leo-3268525.png) no-repeat
     center / cover;
+  filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(130deg)
+    brightness(95%) contrast(80%);
 }
 
 .lamb {
-  background-image: url(../img/icon/free-icon-sheep-2707998.png);
   background: transparent url(../img/icon/free-icon-sheep-2707998.png) no-repeat
     center / cover;
+  filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(130deg)
+    brightness(95%) contrast(80%);
 }

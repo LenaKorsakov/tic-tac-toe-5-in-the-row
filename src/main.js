@@ -1,41 +1,49 @@
-const mainScreen = document.querySelector('.main-screen');
-const gameScreen = document.querySelector('.game-screen');
+import handleGameGridClick from './game-logic.js';
+import { startNewGame } from './start-game.js';
+import { rulesText, rulesItems, EDWARD_URL, BELLA_URL } from './util.js';
 
+const mainScreenWrapperElement = document.querySelector(
+  '.main-screen__wrapper'
+);
+const continueButton = document.querySelector('.btn-continue');
+const rulesElement = document.querySelector('.main-screen_rule');
+const playerImageElement = document.querySelector('.main-screen__wrapper img');
 const gameElement = document.querySelector('.game__grid');
-const startButton = document.querySelector('.btn-start');
 
-const rows = 10;
-const cols = 10;
-let gameField = [];
-console.log(gameField);
-let cells = [];
+let counter = 1;
 
-startButton.addEventListener('click', handleStartButtonClick);
+continueButton.addEventListener('click', handleContinueButton);
+gameElement.addEventListener('click', handleGameGridClick);
 
-function generateGameGrid() {
-  gameElement.innerHTML = '';
+function handleContinueButton() {
+  rulesElement.textContent = rulesText[counter - 1];
+  counter++;
 
-  for (let i = 0; i < rows; i++) {
-    gameField.push([]);
-    for (let j = 0; j < cols; j++) {
-      const currentCell = generateCell(i, j);
-      gameElement.append(currentCell);
-      cells.push(currentCell);
-      gameField[i].push(0);
-    }
+  playerImageElement.src = counter % 2 ? EDWARD_URL : BELLA_URL;
+
+  if (counter === 5) {
+    mainScreenWrapperElement.innerHTML = '';
+
+    const divElement = createRulesListElement();
+    mainScreenWrapperElement.append(divElement);
+
+    continueButton.textContent = 'How about a little game?';
+  }
+
+  if (counter === 6) {
+    startNewGame();
+    counter = 1;
   }
 }
 
-function generateCell(row, col) {
-  const cell = document.createElement('div');
-  cell.classList.add('cell');
-  cell.setAttribute('data-row', row);
-  cell.setAttribute('data-col', col);
-  return cell;
-}
+function createRulesListElement() {
+  const rulesListElement = document.createElement('div');
 
-function handleStartButtonClick() {
-  generateGameGrid();
-  mainScreen.style.display = 'none';
-  gameScreen.classList.remove('hidden');
+  for (let item of rulesItems) {
+    const ruleItemElement = document.createElement('p');
+    ruleItemElement.textContent = item;
+    ruleItemElement.classList.add('main-screen_rule');
+    rulesListElement.insertAdjacentElement('beforeend', ruleItemElement);
+  }
+  return rulesListElement;
 }
