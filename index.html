@@ -18,18 +18,27 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="css/style.css" />
-    <script src="/src/main.js"></script>
+    <script type="module" src="/src/main.js"></script>
   </head>
   <body>
-    <header class="container">
-      <div class="quote">
-        <blockquote>
-          <p>
-            "- And so the lion fell in love with the lamb… - What a stupid lamb!
-            - What a sick, masochistic lion."
-          </p>
-        </blockquote>
-        <p>— Stephenie Meyer, <cite>Twilight</cite></p>
+    <header class="container container--size-l">
+      <div class="header__wrapper">
+        <div class="quote">
+          <blockquote>
+            <p>
+              "- And so the lion fell in love with the lamb… - What a stupid
+              lamb! - What a sick, masochistic lion."
+            </p>
+          </blockquote>
+          <p>— Stephenie Meyer, <cite>Twilight</cite></p>
+        </div>
+        <div class="img__wrapper">
+          <img
+            class="twilight-img"
+            src="./img/icon/twilight-logo.png"
+            alt="twilight-logo"
+          />
+        </div>
       </div>
     </header>
     <section class="main-screen container">
@@ -42,12 +51,22 @@
             was unconditionally and irrevocably in love with him
           </p>
         </div>
-        <button class="btn" class="btn btn-play">Ready To Play</button>
+        <button class="btn btn-start">Ready To Play</button>
       </div>
     </section>
 
-    <section hidden class="game-screen container">
-      <div class="game-screen__wrapper"></div>
+    <section class="game game-screen hidden">
+      <div class="game__wrapper container--size-l">
+        <div class="game__grid"></div>
+        <div class="game__edward-img">
+          <div class="img__wrapper">
+            <img
+              class="twilight-img"
+              src="/img/edward-cullen-twilight-png.png"
+            />
+          </div>
+        </div>
+      </div>
     </section>
 
     <dialog class="end-game-screen">

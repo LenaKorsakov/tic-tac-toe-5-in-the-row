@@ -64,12 +64,11 @@ body {
 /* COLORS */
 
 :root {
-  --main-color: #2f2520;
-  --dark-brown: #2c1d1a;
-  --light-brown: #65422f;
-  --light-pink: #e6d7db;
-  --red: #872c2a;
-  --light-red: #a33533;
+  --main-color: #093d4e;
+  --dark-green: #2e7552;
+  --light-green: #09898a;
+  --violet: #484e79;
+  --brown: #503a2c;
   --white: #fff;
 }
 
@@ -92,25 +91,25 @@ html {
   line-height: 1.5;
   font-family: 'Raleway', 'Arial', sans-serif;
   font-feature-settings: 'pnum' on, 'lnum' on;
-  color: #e6e6e6;
 }
 
 body {
   width: 100%;
   height: 100%;
   overflow-wrap: break-word;
+  /* background-image: url(../img/Forest-wallpaper-twilight-series-7768791-847-479.jpeg); */
+  /* background: transparent
+    url(../img/Forest-wallpaper-twilight-series-7768791-847-479.jpeg) no-repeat
+    center / cover; */
   background: linear-gradient(
     0deg,
     var(--main-color) 0%,
-    var(--dark-brown) 100%
+    var(--dark-green) 100%
   );
 }
 
-.quote {
-  background-color: #fff;
-  color: var(--red);
-  font-size: 2rem;
-  font-weight: 800;
+.hidden {
+  display: none;
 }
 
 /* blockquote {
@@ -125,18 +124,6 @@ blockquote::before {
   font-family: sans-serif;
 } */
 
-.lion {
-  background-image: url(../img/icon/free-icon-leo-3268525.png);
-  background: transparent url(../img/icon/free-icon-leo-3268525.png) no-repeat
-    center / cover;
-}
-
-.lamb {
-  background-image: url(../img/icon/free-icon-sheep-2707998.png);
-  background: transparent url(../img/icon/free-icon-leo-3268525.png) no-repeat
-    center / cover;
-}
-
 .container {
   --container-offset: 32px;
   width: calc(1080px + var(--container-offset) * 2);
@@ -145,11 +132,17 @@ blockquote::before {
 }
 
 .container--size-l {
-  width: 1366px;
+  width: 90vw;
 }
 
 .container--size-s {
   width: calc(890px + var(--container-offset) * 2);
+}
+
+.img__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn {
@@ -160,13 +153,39 @@ blockquote::before {
   font-weight: 600;
   font-size: 1.5rem;
   line-height: 1.2;
-  color: var(--light-pink);
+  color: var(--white);
   letter-spacing: 0.05rem;
   text-transform: inherit;
   background-color: rgba(255, 255, 255, 0);
-  border: 1px solid var(--light-red);
+  border: 1px solid var(--light-green);
   border-radius: 47px;
   cursor: pointer;
+}
+
+/* HEADER */
+
+.header__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem;
+
+  & .quote {
+    color: var(--white);
+    font-size: 2rem;
+    font-weight: 800;
+    padding: 5px;
+    margin-bottom: 10vh;
+    flex: 0 0 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  & .twilight-img {
+    height: 20vh;
+  }
 }
 
 /* MAIN SCREEN */
@@ -183,11 +202,44 @@ blockquote::before {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1rem groove var(--light-red);
+  border: 1rem groove var(--main-color);
 }
 
 .main-screen p {
   font-size: 2rem;
   padding: 2rem;
-  color: var(--light-pink);
+  color: var(--white);
+}
+
+/* GAME GRID */
+
+.game__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.game__grid {
+  background-color: var(--dark-green);
+  max-width: 1000px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.cell {
+  height: 100px;
+  width: 100px;
+  border: 1px solid var(--light-green);
+}
+
+.lion {
+  background-image: url(../img/icon/free-icon-leo-3268525.png);
+  background: transparent url(../img/icon/free-icon-leo-3268525.png) no-repeat
+    center / cover;
+}
+
+.lamb {
+  background-image: url(../img/icon/free-icon-sheep-2707998.png);
+  background: transparent url(../img/icon/free-icon-sheep-2707998.png) no-repeat
+    center / cover;
 }
