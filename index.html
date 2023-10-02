@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Twilight tic-tac-toe" />
+    <title>Twilight tic-tac-toe</title>
+    <link
+      rel="preload"
+      href="fonts/raleway-600.woff"
+      as="font"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="fonts/raleway-800.woff"
+      as="font"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="/src/main.js"></script>
+  </head>
+  <body>
+    <header class="container">
+      <div class="quote">
+        <blockquote>
+          <p>
+            "- And so the lion fell in love with the lamb… - What a stupid lamb!
+            - What a sick, masochistic lion."
+          </p>
+        </blockquote>
+        <p>— Stephenie Meyer, <cite>Twilight</cite></p>
+      </div>
+    </header>
+    <section class="main-screen container">
+      <div class="main-screen__wrapper">
+        <div class="main-screen__rules">
+          <p class="main-screen__history">
+            About three things I was absolutely positive. First, Edward was a
+            vampire. Second, there was a part of him—and I didn't know how
+            dominant that part might be—that thirsted for my blood. And third, I
+            was unconditionally and irrevocably in love with him
+          </p>
+        </div>
+        <button class="btn" class="btn btn-play">Ready To Play</button>
+      </div>
+    </section>
+
+    <section hidden class="game-screen container">
+      <div class="game-screen__wrapper"></div>
+    </section>
+
+    <dialog class="end-game-screen">
+      <h2 class="">Congrats!</h2>
+      <button class="btn">Play again?</button>
+    </dialog>
+  </body>
+</html>
