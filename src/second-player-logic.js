@@ -3,6 +3,8 @@ const X = 1;
 const O = 2;
 
 const LENGTH_TO_WIN = 5;
+const INITIAL_DEPTH = 0;
+const MAX_DEPTH = 3;
 
 const DIRECTIONS = [
   [
@@ -31,7 +33,7 @@ const DIRECTIONS = [
  * @param {number} j
  * @returns {[number, number]}
  */
-const getNextPosition = (i, j, direction, fieldSize) => {
+function getNextPosition(i, j, direction, fieldSize) {
   const nextI = i + direction[0];
   const nextJ = j + direction[1];
   //borders
@@ -39,44 +41,7 @@ const getNextPosition = (i, j, direction, fieldSize) => {
     return undefined;
   }
   return [nextI, nextJ];
-};
-
-/**
- * @name emptyCellsAround
- * @function
- * @param {number[][]} field
- * @param {number} i
- * @param {number} j
- * @returns {number[][]}
- */
-const emptyCellsAround = (field, i, j) => {
-  let result = [];
-  DIRECTIONS.forEach((directionPair) => {
-    const [firstDirection, secondDirection] = directionPair;
-    [firstDirection, secondDirection].forEach((direction) => {
-      const nextPosition = nextPosition(i, j, direction, field.length);
-      if (nextPosition && field[nextPosition[0]][nextPosition[1]] === empty) {
-        result.push([i, j]);
-      }
-    });
-  });
-  return result;
-};
-
-const logField = (field) => {
-  console.log('------');
-  field.forEach((line) => {
-    let line_str = line.join('');
-    line_str = line_str
-      .replaceAll('' + empty, ' ')
-      .replaceAll('' + X, 'X')
-      .replaceAll('' + O, 'O');
-    console.log(
-      line_str + '                                    ' + Math.random()
-    );
-  });
-  console.log('------');
-};
+}
 
 /**
  * count each move score
@@ -87,7 +52,7 @@ const logField = (field) => {
  * @param {number} j
  * @returns {number}
  */
-const getMoveScore = (field, i, j) => {
+function getMoveScore(field, i, j) {
   const playerPosition = field[i][j];
 
   let maxScore = 0;
@@ -115,11 +80,11 @@ const getMoveScore = (field, i, j) => {
         const nextElement = field[nextPosition[0]][nextPosition[1]];
         if (nextElement !== playerPosition) {
           if (nextElement === empty) {
-            numberOfSpacesAfterPlayersLine += 1;
+            numberOfSpacesAfterPlayersLine++;
           }
           break;
         }
-        lengthOfPlayersLine += 1;
+        lengthOfPlayersLine++;
         coordI = nextPosition[0];
         coordJ = nextPosition[1];
       }
@@ -149,7 +114,7 @@ const getMoveScore = (field, i, j) => {
 
     if (
       lengthOfPlayersLine === LENGTH_TO_WIN - 2 &&
-      numberOfSpacesAfterPlayersLine == 2
+      numberOfSpacesAfterPlayersLine === 2
     ) {
       numOfThreeLengthLinesWithSpaces += 1;
     }
@@ -161,16 +126,18 @@ const getMoveScore = (field, i, j) => {
     maxScore = Math.max(maxScore, LENGTH_TO_WIN - 0.5); //winning situation
   }
   return maxScore;
-};
+}
 
-const notPlayersPosition = (me = X) => {
+function notPlayersPosition(me = О) {
   if (me === X) {
     return O;
   }
   return X;
-};
+}
 
-const hasNonEmptyNear = (i, j, fieldSize) => {
+function hasNonEmptyCellsNear(i, j, field) {
+  const fieldSize = field.length;
+
   let isEmptyCellsNear = false;
 
   DIRECTIONS.forEach((directionsPairs) => {
@@ -183,30 +150,34 @@ const hasNonEmptyNear = (i, j, fieldSize) => {
   });
 
   return isEmptyCellsNear;
-};
+}
 
 /**
  * return next move
  * @name getNextMove
  * @function
  * @param {number[][]} field
- * @returns {boolean}
+ * @returns {[number, number]}
  */
-const getBestNextMove = (field, playerMarker = X, depth = 0, maxDepth = 3) => {
+function getBestNextMove(
+  field,
+  playerMarker = X,
+  depth = INITIAL_DEPTH,
+  maxDepth = MAX_DEPTH
+) {
   const fieldSize = field.length;
 
   let allPossibleMoves = [];
-  let isEmpty = true;
+  let isFieldEmpty = true;
 
-  for (i = 0; i < fieldSize; i++) {
-    //TODO j???
-    for (j = 0; j < fieldSize; j++) {
+  for (let i = 0; i < fieldSize; i++) {
+    for (let j = 0; j < field[i].length; j++) {
       if (field[i][j] !== empty) {
-        isEmpty = false;
+        isFieldEmpty = false;
         continue;
       }
 
-      if (!hasNonEmptyNear(i, j, fieldSize)) {
+      if (!hasNonEmptyCellsNear(i, j, field)) {
         continue;
       }
 
@@ -214,9 +185,9 @@ const getBestNextMove = (field, playerMarker = X, depth = 0, maxDepth = 3) => {
     }
   }
 
-  //??????why
-  if (isEmpty) {
-    return [(fieldSize / 2) | 0, (fieldSize / 2) | 0];
+  //in case of first move
+  if (isFieldEmpty) {
+    return [Math.floor(fieldSize / 2) | 0, Math.floor(fieldSize / 2) | 0];
   }
 
   let bestNextMove = undefined;
@@ -245,7 +216,7 @@ const getBestNextMove = (field, playerMarker = X, depth = 0, maxDepth = 3) => {
       bestOpponentMove = getBestNextMove(
         field,
         notPlayersPosition(playerMarker),
-        depth++,
+        depth + 1,
         maxDepth
       );
 
@@ -284,292 +255,7 @@ const getBestNextMove = (field, playerMarker = X, depth = 0, maxDepth = 3) => {
     field[possibleMove[0]][possibleMove[1]] = empty;
   });
 
-  if (depth === 0) {
-    console.log('Possible moves: ', allPossibleMoves.length);
-    console.log('Max Score: ', maxMoveScore);
-    console.log('Next Move: ', bestNextMove);
-    console.log('Max opponent Score: ', minOpponentScore);
-  }
-
   return bestNextMove;
-};
+}
 
-export default { getBestNextMove };
-
-// let FIELD = [
-//   [
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//   ],
-//   [
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//   ],
-//   [
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//   ],
-//   [
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//   ],
-//   [
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//   ],
-//   [
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//   ],
-//   [
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//   ],
-//   [
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//   ],
-//   [
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//   ],
-//   [
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//   ],
-//   [
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//   ],
-//   [
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//   ],
-//   [
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//   ],
-//   [
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//   ],
-//   [
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//     empty,
-//   ],
-// ];
-
-// let me = X;
-
-// for (let p = 0; p <= 100; p++) {
-//   move = getBestNextMove(FIELD, me, 0, 1);
-//   if (!!move) {
-//     FIELD[move[0]][move[1]] = me;
-//     /// CHANGE DOM data-coord="0-0"
-//     score = getMoveScore(FIELD, move[0], move[1]);
-//     if (score == LENGTH_TO_WIN) {
-//       console.log('Game over. ' + me + ' won!');
-//       logField(FIELD);
-//       break;
-//     }
-//     me = notPlayersPosition(me);
-//   } else {
-//     // tie
-//     break;
-//   }
-//   logField(FIELD);
+export { getBestNextMove, getMoveScore, LENGTH_TO_WIN };

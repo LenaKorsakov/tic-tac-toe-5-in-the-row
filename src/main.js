@@ -1,6 +1,6 @@
 import handleGameGridClick from './game-logic.js';
 import { startNewGame } from './start-game.js';
-import { rulesText, rulesItems, EDWARD_URL, BELLA_URL } from './util.js';
+import { rulesText, rulesItems, URL } from './util.js';
 
 const mainScreenWrapperElement = document.querySelector(
   '.main-screen__wrapper'
@@ -19,7 +19,7 @@ function handleContinueButton() {
   rulesElement.textContent = rulesText[counter - 1];
   counter++;
 
-  playerImageElement.src = counter % 2 ? EDWARD_URL : BELLA_URL;
+  playerImageElement.src = counter % 2 ? URL.EDWARD : URL.BELLA;
 
   if (counter === 5) {
     mainScreenWrapperElement.innerHTML = '';

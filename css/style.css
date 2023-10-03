@@ -9,24 +9,6 @@ body {
 
 @font-face {
   font-style: normal;
-  font-weight: 400;
-  font-family: 'Raleway';
-  font-display: swap;
-  src: url('../fonts/raleway-400.woff2') format('woff2'),
-    url('../fonts/raleway-400.woff') format('woff');
-}
-
-@font-face {
-  font-style: normal;
-  font-weight: 500;
-  font-family: 'Raleway';
-  font-display: swap;
-  src: url('../fonts/raleway-500.woff2') format('woff2'),
-    url('../fonts/raleway-500.woff') format('woff');
-}
-
-@font-face {
-  font-style: normal;
   font-weight: 600;
   font-family: 'Raleway';
   font-display: swap;
@@ -51,16 +33,6 @@ body {
   src: url('../fonts/raleway-800.woff2') format('woff2'),
     url('../fonts/raleway-800.woff') format('woff');
 }
-
-@font-face {
-  font-style: normal;
-  font-weight: 900;
-  font-family: 'Raleway';
-  font-display: swap;
-  src: url('../fonts/raleway-900.woff2') format('woff2'),
-    url('../fonts/raleway-900.woff') format('woff');
-}
-
 /* COLORS */
 
 :root {
@@ -136,7 +108,7 @@ body {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 0.2em 20px;
+  padding: 0.5em 20px;
   font-weight: 600;
   font-size: 1.5rem;
   line-height: 1.2;
@@ -214,7 +186,8 @@ body {
 
 .main-screen__wrapper {
   display: flex;
-  justify-content: center;
+  max-height: 50vh;
+  justify-content: space-evenly;
   align-items: center;
 
   & img {
@@ -222,12 +195,16 @@ body {
   }
 }
 
-.main-screen p {
+.main-screen__wrapper p {
   font-size: 2rem;
-  padding: 1rem;
+  max-height: 5px;
   color: var(--white);
   max-width: 50vw;
-  max-height: 30vh;
+  max-height: 5vh;
+}
+
+.main-screen .btn {
+  margin-top: 5rem;
 }
 
 /* GAME GRID */
@@ -254,13 +231,13 @@ body {
 .lion {
   background: transparent url(../img/icon/free-icon-leo-3268525.png) no-repeat
     center / cover;
-  filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(130deg)
-    brightness(95%) contrast(80%);
+  filter: invert(48%) sepia(10%) saturate(3000%) hue-rotate(150deg)
+    brightness(45%) contrast(80%);
 }
 
 .lamb {
   background: transparent url(../img/icon/free-icon-sheep-2707998.png) no-repeat
     center / cover;
   filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(130deg)
-    brightness(95%) contrast(80%);
+    brightness(90%) contrast(80%);
 }
