@@ -4,7 +4,7 @@ const gameElement = document.querySelector('.game__grid');
 
 const ROWS = 10;
 const COLS = 10;
-const cells = [];
+let cells = [];
 
 let gameField = [];
 
@@ -36,4 +36,11 @@ function startNewGame() {
   gameScreen.classList.remove('hidden');
 }
 
-export { startNewGame, gameField };
+function restartGame() {
+  gameField = [];
+  cells = [];
+
+  generateGameGrid();
+}
+
+export { startNewGame, gameField, restartGame };

@@ -21,7 +21,7 @@ function handleContinueButton() {
 
   playerImageElement.src = counter % 2 ? URL.EDWARD : URL.BELLA;
 
-  if (counter === 5) {
+  if (counter === 6) {
     mainScreenWrapperElement.innerHTML = '';
 
     const divElement = createRulesListElement();
@@ -30,7 +30,7 @@ function handleContinueButton() {
     continueButton.textContent = 'How about a little game?';
   }
 
-  if (counter === 6) {
+  if (counter === 7) {
     startNewGame();
     counter = 1;
   }

@@ -18,4 +18,10 @@ const URL = {
   EDWARD: '../img/edward-cullen-twilight-png.png',
 };
 
-export { rulesText, rulesItems, URL };
+const gameOverScreenText = {
+  TIE: `Well done, Bella. But I think I'll need to come up with something more challenging before I make such a life-altering decision. But you can try again!`,
+  BELLA_WON: 'Bella is a vampire now!',
+  EDWARD_WON: `I may have lost the game, but I haven't lost my determination to be with you, Edward. I'll find another way, no matter how long it takes.`,
+};
+
+export { rulesText, rulesItems, URL, gameOverScreenText };
