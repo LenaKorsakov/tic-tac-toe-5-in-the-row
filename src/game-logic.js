@@ -9,14 +9,6 @@ import { gameOverScreenText } from './util.js';
 const gameOverModal = document.querySelector('.game-over-modal');
 const restartGameButton = gameOverModal.querySelector('.btn');
 
-restartGameButton.addEventListener('click', handleRestartButtonClick);
-
-function handleRestartButtonClick() {
-  gameOverModal.close();
-  restartGame();
-  document.querySelector('body').classList.remove('scroll-lock');
-}
-
 const X = 1;
 const O = 2;
 
@@ -25,6 +17,16 @@ const SECOND_PLAYER_MARKER = O;
 
 let isFirstPlayerMove = true;
 let isFirstPlayerWon = false;
+
+restartGameButton.addEventListener('click', handleRestartButtonClick);
+
+function handleRestartButtonClick() {
+  gameOverModal.close();
+  restartGame();
+  document.querySelector('body').classList.remove('scroll-lock');
+  isFirstPlayerMove = true;
+  isFirstPlayerWon = false;
+}
 
 function handleGameGridClick(event) {
   const currentCell = event.target;
