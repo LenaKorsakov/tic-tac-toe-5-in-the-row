@@ -40,6 +40,9 @@ Bella and Edward take turns placing their markers ("X" or "O") on a 10x10 Tic Ta
 - HTML
 - CSS
 
+## Demo site
+ <a href='https://lenakorsakov.github.io/tic-tac-toe-5-in-the-row/'> GO TO SITE ---> </a>
+
 Enjoy the game and may the best player win! Will Bella succeed in her quest to become a vampire, or will Edward prove to be the unbeatable opponent?
 
 ### Credits
