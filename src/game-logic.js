@@ -4,7 +4,11 @@ import {
   getMoveScore,
   LENGTH_TO_WIN,
 } from './second-player-logic.js';
-import { gameOverModalURL, gameOverScreenText } from './util.js';
+import {
+  gameOverModalURL,
+  gameOverScreenText,
+  randomEdwardQuote,
+} from './util.js';
 
 const X = 1;
 const O = 2;
@@ -17,6 +21,7 @@ let isFirstPlayerWon = false;
 
 const gameOverModal = document.querySelector('.game-over-modal');
 const restartGameButton = gameOverModal.querySelector('.btn');
+const edwardQuoteElement = document.querySelector('.edward__quote p');
 
 restartGameButton.addEventListener('click', handleRestartButtonClick);
 gameOverModal.addEventListener('click', handleBackDropClick);
@@ -120,6 +125,7 @@ function handleGameGridClick(event) {
     !currentCell.classList.contains('lamb') &&
     !currentCell.classList.contains('lion')
   ) {
+    edwardQuoteElement.textContent = randomEdwardQuote();
     firstPlayerMove(currentCell, row, col);
 
     // in case of odd number of rows/cols

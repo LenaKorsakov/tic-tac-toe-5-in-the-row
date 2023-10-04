@@ -48,8 +48,7 @@ body {
   --dark-green: #2e7552;
   --light-green: #09898a;
   --violet: #484e79;
-  --brown: #503a2c;
-  --white: #e9f6e9;
+  --white: #ebfbee;
 }
 
 * {
@@ -243,11 +242,11 @@ body {
   width: 100rem;
   height: 40rem;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
 
   & img {
-    max-height: 300px;
+    max-height: 330px;
   }
 }
 .game__grid {
@@ -262,6 +261,39 @@ body {
   height: 50px;
   width: 50px;
   border: 1px solid var(--light-green);
+}
+
+.edward__wrapper {
+  display: flex;
+  height: 500px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+
+  & img {
+    position: absolute;
+    top: 10rem;
+    left: 5rem;
+  }
+}
+
+.edward__quote {
+  display: flex;
+  width: 500px;
+  align-items: center;
+  justify-content: center;
+  flex: 0.5;
+  background-color: hsl(120, 8%, 93%, 0.75);
+  color: var(--main-color);
+  border: 3px ridge var(--violet);
+  font-size: 1.3rem;
+  font-weight: 400;
+  border-radius: 9px;
+
+  & p {
+    padding: 1rem;
+  }
 }
 
 .lion {

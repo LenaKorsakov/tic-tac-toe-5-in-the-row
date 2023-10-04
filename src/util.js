@@ -7,7 +7,7 @@ const rulesText = [
 
 const rulesItems = [
   `Objective: The objective of the game is to get five of your markers in a row, either horizontally, vertically, or diagonally.`,
-  `Markers: Bella uses "Lamb," Edward uses "Lion"`,
+  `Markers: Bella uses 'Lamb," Edward uses "Lion"`,
   `Turns: Players take turns placing their markers on the grid, starting with Bella.`,
   'Winning Condition: The first player to achieve a row of five markers wins the game. Be careful - Edward can read minds!',
   `Edward's Promise: If Bella wins the game and successfully gets five of her markers in a row, Edward will agree to her request to be turned into a vampire.`,
@@ -30,10 +30,33 @@ const gameOverModalURL = {
   TIE: '../img/edward-bella-sunny.jpeg',
 };
 
+const edwardQuotes = [
+  'You really should stay away from me.',
+  `I like the night. Without the dark, we'd never see the stars.`,
+  'Bella, you are my life now.',
+  `I don't have the strength to stay away from you anymore.`,
+  'When you can live forever, what do you live for?',
+  `Don't be self-conscious, if I could dream at all, it would be about you. And I'm not ashamed of it.`,
+  'I may not be a human, but I am a man.',
+  'You better hold on tight, spidermonkey',
+  'Isabella Swan, I promise to love you every moment of forever.',
+  `You're my only reason to stay alive if that's what I am.`,
+  'Bella, you are like my personal brand of heroin.',
+  'What if I’m not a superhero. What if I’m the bad guy?',
+  'Do I dazzle you?',
+];
+
+function randomEdwardQuote() {
+  const index = Math.floor(Math.random() * edwardQuotes.length);
+
+  return edwardQuotes[index];
+}
+
 export {
   rulesText,
   rulesItems,
   mainURL as URL,
   gameOverScreenText,
   gameOverModalURL,
+  randomEdwardQuote,
 };
