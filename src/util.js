@@ -14,8 +14,8 @@ const rulesItems = [
 ];
 
 const URL = {
-  BELLA: '../img/bella-swan.png',
-  EDWARD: '../img/edward-cullen-twilight-png.png',
+  BELLA: './img/bella-swan.png',
+  EDWARD: './img/edward-cullen-twilight-png.png',
 };
 
 const gameOverScreenText = {
