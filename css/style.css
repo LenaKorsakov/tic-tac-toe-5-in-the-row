@@ -59,7 +59,7 @@ body {
 html {
   font-style: normal;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.5;
   font-family: 'Raleway', 'Arial', sans-serif;
   font-feature-settings: 'pnum' on, 'lnum' on;
@@ -92,16 +92,14 @@ body {
   width: calc(1080px + var(--container-offset) * 2);
   margin: 0 auto;
   padding: 0 var(--container-offset);
+  display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .container--size-l {
-  width: 90vw;
-}
-
-.container--size-s {
-  width: calc(890px + var(--container-offset) * 2);
+  width: 1366px;
 }
 
 .img__wrapper {
@@ -114,9 +112,9 @@ body {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 0.5em 1em;
+  padding: 0.3rem 0.5rem;
   font-weight: 600;
-  font-size: 2rem;
+  font-size: 1.5rem;
   line-height: 1.2;
   color: var(--white);
   letter-spacing: 0.05rem;
@@ -129,21 +127,22 @@ body {
 
 .btn:hover {
   background-color: var(--violet);
-  border: 4px outset var(--violet);
+  border: 3px outset var(--violet);
 }
 
 /* HEADER */
 
 .header__wrapper {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   padding: 5rem;
   position: relative;
+  width: 100rem;
 
   & .quote {
     color: var(--white);
-    font-size: 2.5rem;
+    font-size: 1.7rem;
     font-weight: 800;
     padding: 5px;
     flex: 0 0 50vw;
@@ -151,7 +150,7 @@ body {
   }
 
   & .quote__author {
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: var(--light-green);
   }
 
@@ -174,18 +173,10 @@ body {
 }
 
 /* MAIN SCREEN */
-/* .main-screen {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
 
 .main-screen {
-  width: 50vw;
-  height: 50vh;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  width: 100rem;
+  height: 40rem;
   border: 1rem ridge var(--violet);
   background: linear-gradient(
     0deg,
@@ -200,18 +191,23 @@ body {
   justify-content: space-evenly;
   align-items: center;
 
+  & .img__wrapper {
+    flex: 0 0 auto;
+    width: 25rem;
+  }
+
   & img {
-    max-width: 20vw;
     max-height: 30vh;
   }
-}
 
-.main-screen__wrapper p {
-  font-size: 2rem;
-  max-height: 5px;
-  color: var(--white);
-  max-width: 50vw;
-  max-height: 5vh;
+  & p {
+    font-size: 1.5rem;
+    max-height: 5px;
+    color: var(--white);
+    max-width: 50vw;
+    max-height: 5vh;
+    flex: 2;
+  }
 }
 
 .main-screen .btn {
@@ -222,20 +218,28 @@ body {
 
 .game__wrapper {
   display: flex;
-  justify-content: center;
+  margin: 0 auto;
+  width: 100rem;
+  height: 40rem;
+  flex-direction: row;
+  justify-content: space-evenly;
   align-items: center;
+
+  & img {
+    max-height: 300px;
+  }
 }
 .game__grid {
   background-color: var(--dark-green);
-  max-width: 1000px;
+  max-width: 500px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
 .cell {
-  height: 100px;
-  width: 100px;
+  height: 50px;
+  width: 50px;
   border: 1px solid var(--light-green);
 }
 
@@ -255,27 +259,30 @@ body {
 
 /* MODAl */
 
+dialog {
+  border: none;
+}
+
 .modal__content {
-  width: 30vw;
-  height: 30vh;
+  width: 50vw;
+  height: 50vh;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  border: 1rem solid var(--violet);
   background: linear-gradient(
     0deg,
     var(--main-color) 0%,
     var(--light-green) 100%
   );
   color: var(--white);
-}
 
-.modal__content h1 {
-  padding: 5rem;
-  max-width: 25vw;
-  text-align: center;
-  font-size: 1.5rem;
+  & p {
+    padding: 5rem;
+    max-width: 25vw;
+    text-align: center;
+    font-size: 1.5rem;
+  }
 }
 
 dialog::backdrop {

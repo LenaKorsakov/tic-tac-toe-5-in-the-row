@@ -33,7 +33,11 @@ function handleGameGridClick(event) {
   const row = +currentCell.dataset.row;
   const col = +currentCell.dataset.col;
 
-  if (isFirstPlayerMove) {
+  if (
+    isFirstPlayerMove &&
+    !currentCell.classList.contains('lamb') &&
+    !currentCell.classList.contains('lion')
+  ) {
     firstPlayerMove(currentCell, row, col);
 
     // in case of odd number of rows/cols
@@ -48,7 +52,7 @@ function handleGameGridClick(event) {
 }
 
 function firstPlayerMove(currentCell, row, col) {
-  if (!gameField[row][col]) {
+  if (gameField[row][col] === 0) {
     gameField[row][col] = FIRST_PLAYER_MARKER;
     currentCell.classList.add('lamb');
     isFirstPlayerMove = false;
