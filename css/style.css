@@ -202,6 +202,10 @@ body {
     var(--main-color) 0%,
     var(--light-green) 100%
   );
+
+  & .btn {
+    margin-top: 5rem;
+  }
 }
 
 .main-screen__wrapper {
@@ -221,17 +225,10 @@ body {
 
   & p {
     font-size: 1.5rem;
-    max-height: 5px;
     color: var(--white);
-    max-width: 50vw;
-    max-height: 5vh;
-    flex: 2;
+    flex: 1;
     line-height: 2;
   }
-}
-
-.main-screen .btn {
-  margin-top: 5rem;
 }
 
 /* GAME GRID */
