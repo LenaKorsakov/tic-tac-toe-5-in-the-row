@@ -13,7 +13,7 @@ const rulesItems = [
   `Edward's Promise: If Bella wins the game and successfully gets five of her markers in a row, Edward will agree to her request to be turned into a vampire.`,
 ];
 
-const URL = {
+const mainURL = {
   BELLA: './img/bella-swan.png',
   EDWARD: './img/edward-cullen-twilight-png.png',
 };
@@ -24,4 +24,16 @@ const gameOverScreenText = {
   EDWARD_WON: `I may have lost the game, but I haven't lost my determination to be with you, Edward. I'll find another way, no matter how long it takes.`,
 };
 
-export { rulesText, rulesItems, URL, gameOverScreenText };
+const gameOverModalURL = {
+  BELLA_WON: './img/bella-vampire.jpeg',
+  EDWARD_WON: './img/bella-wedding.jpeg',
+  TIE: '../img/edward-bella-sunny.jpeg',
+};
+
+export {
+  rulesText,
+  rulesItems,
+  mainURL as URL,
+  gameOverScreenText,
+  gameOverModalURL,
+};

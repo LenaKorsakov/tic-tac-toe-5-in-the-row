@@ -114,7 +114,7 @@ body {
   align-items: center;
   padding: 0.3rem 0.5rem;
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   line-height: 1.2;
   color: var(--white);
   letter-spacing: 0.05rem;
@@ -127,7 +127,7 @@ body {
 
 .btn:hover {
   background-color: var(--violet);
-  border: 3px outset var(--violet);
+  border: 1px outset var(--violet);
 }
 
 /* HEADER */
@@ -259,16 +259,17 @@ body {
 
 /* MODAl */
 
-dialog {
+.game-over-modal {
   border: none;
+  padding: 0;
 }
 
-.modal__content {
+.game-over-modal__wrapper {
   width: 50vw;
   height: 50vh;
+  padding: 1em;
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   background: linear-gradient(
     0deg,
@@ -276,12 +277,25 @@ dialog {
     var(--light-green) 100%
   );
   color: var(--white);
+  border: 1rem ridge var(--violet);
+}
+
+.modal__content {
+  display: flex;
+  width: 50vw;
+  height: 50vh;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 
   & p {
-    padding: 5rem;
-    max-width: 25vw;
+    max-width: 30vw;
     text-align: center;
     font-size: 1.5rem;
+  }
+
+  & img {
+    height: 20vh;
   }
 }
 

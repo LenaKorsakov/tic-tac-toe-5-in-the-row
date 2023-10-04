@@ -4,10 +4,7 @@ import {
   getMoveScore,
   LENGTH_TO_WIN,
 } from './second-player-logic.js';
-import { gameOverScreenText } from './util.js';
-
-const gameOverModal = document.querySelector('.game-over-modal');
-const restartGameButton = gameOverModal.querySelector('.btn');
+import { gameOverModalURL, gameOverScreenText } from './util.js';
 
 const X = 1;
 const O = 2;
@@ -18,38 +15,11 @@ const SECOND_PLAYER_MARKER = O;
 let isFirstPlayerMove = true;
 let isFirstPlayerWon = false;
 
+const gameOverModal = document.querySelector('.game-over-modal');
+const restartGameButton = gameOverModal.querySelector('.btn');
+
 restartGameButton.addEventListener('click', handleRestartButtonClick);
-
-function handleRestartButtonClick() {
-  gameOverModal.close();
-  restartGame();
-  document.querySelector('body').classList.remove('scroll-lock');
-  isFirstPlayerMove = true;
-  isFirstPlayerWon = false;
-}
-
-function handleGameGridClick(event) {
-  const currentCell = event.target;
-  const row = +currentCell.dataset.row;
-  const col = +currentCell.dataset.col;
-
-  if (
-    isFirstPlayerMove &&
-    !currentCell.classList.contains('lamb') &&
-    !currentCell.classList.contains('lion')
-  ) {
-    firstPlayerMove(currentCell, row, col);
-
-    // in case of odd number of rows/cols
-    if (isGameFieldFull(gameField)) {
-      showModal(gameOverScreenText.TIE);
-    }
-
-    if (!isFirstPlayerWon) {
-      secondPlayerMove();
-    }
-  }
-}
+gameOverModal.addEventListener('click', handleBackDropClick);
 
 function firstPlayerMove(currentCell, row, col) {
   if (gameField[row][col] === 0) {
@@ -62,9 +32,8 @@ function firstPlayerMove(currentCell, row, col) {
 
   const firstPlayerScore = getMoveScore(gameField, row, col);
   if (firstPlayerScore === LENGTH_TO_WIN) {
-    showModal(gameOverScreenText.BELLA_WON);
+    showModal(gameOverScreenText.BELLA_WON, gameOverModalURL.BELLA_WON);
 
-    console.log('Game over. ' + 'Bella' + ' won!');
     isFirstPlayerWon = true;
     return;
   }
@@ -84,16 +53,15 @@ function secondPlayerMove() {
 
     const secondPlayerScore = getMoveScore(gameField, coordI, coordJ);
     if (secondPlayerScore === LENGTH_TO_WIN) {
-      showModal(gameOverScreenText.EDWARD_WON);
+      showModal(gameOverScreenText.EDWARD_WON, gameOverModalURL.EDWARD_WON);
 
-      console.log('Game over. ' + 'Edward' + ' won!');
       return;
     }
 
     isFirstPlayerMove = true;
 
     if (isGameFieldFull(gameField)) {
-      showModal(gameOverScreenText.TIE);
+      showModal(gameOverScreenText.TIE, gameOverModalURL.TIE);
     }
   }, 800);
 }
@@ -108,11 +76,61 @@ function isGameFieldFull(gameField) {
   return !gameArray.includes(0);
 }
 
-function showModal(text) {
+function showModal(text, url = gameOverModalURL.TIE) {
+  const gameOverScreenImageElement = document.querySelector(
+    '.game-over-modal__wrapper img'
+  );
   const title = document.querySelector('.modal__title');
+
   title.textContent = text;
+  gameOverScreenImageElement.src = url;
   document.querySelector('body').classList.add('scroll-lock');
   gameOverModal.showModal();
+}
+
+function resetGameField() {
+  gameOverModal.close();
+  restartGame();
+  document.querySelector('body').classList.remove('scroll-lock');
+  isFirstPlayerMove = true;
+  isFirstPlayerWon = false;
+}
+
+function handleRestartButtonClick() {
+  resetGameField();
+}
+
+function handleBackDropClick({ currentTarget, target }) {
+  const dialogElement = currentTarget;
+  const isClickedOnBackDrop = target === dialogElement;
+  if (isClickedOnBackDrop) {
+    dialogElement.close();
+  }
+
+  resetGameField();
+}
+
+function handleGameGridClick(event) {
+  const currentCell = event.target;
+  const row = +currentCell.dataset.row;
+  const col = +currentCell.dataset.col;
+
+  if (
+    isFirstPlayerMove &&
+    !currentCell.classList.contains('lamb') &&
+    !currentCell.classList.contains('lion')
+  ) {
+    firstPlayerMove(currentCell, row, col);
+
+    // in case of odd number of rows/cols
+    if (isGameFieldFull(gameField)) {
+      showModal(gameOverScreenText.TIE, gameOverModalURL.TIE);
+    }
+
+    if (!isFirstPlayerWon) {
+      secondPlayerMove();
+    }
+  }
 }
 
 export default handleGameGridClick;
