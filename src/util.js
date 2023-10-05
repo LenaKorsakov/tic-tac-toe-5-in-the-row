@@ -55,8 +55,8 @@ const sound = {
 };
 
 const soundImage = {
-  SOUND_ON: '/img/icon/icon-sound-on.png',
-  SOUND_OFF: '/img/icon/icon-mute.png',
+  SOUND_ON: '/img/icon/icon-sound.png',
+  SOUND_OFF: '/img/icon/icon-no-noise.png',
 };
 
 function randomEdwardQuote() {
