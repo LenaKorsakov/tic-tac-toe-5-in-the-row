@@ -51,6 +51,7 @@ const sound = {
   CLICK_SOUND: new Audio('/music/click-sound.mp3'),
   BELLAS_MOVE: new Audio('/music/bellas-move.mp3'),
   EDWARDS_MOVE: new Audio('/music/edvard-move.mp3'),
+  WOLF_SOUND: new Audio('/music/wolf-sound.mp3'),
 };
 
 const soundImage = {

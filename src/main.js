@@ -12,9 +12,10 @@ const gameElement = document.querySelector('.game__grid');
 
 const imagesElements = document.querySelectorAll('.img__wrapper img');
 const soundElement = document.querySelector('.img-sound img');
+const wolfElements = document.querySelectorAll('.wolf__img');
 
 let counter = 1;
-let soundOn = false;
+let soundOn = true;
 
 continueButton.addEventListener('click', handleContinueButton);
 gameElement.addEventListener('click', handleGameGridClick);
@@ -28,6 +29,10 @@ imagesElements.forEach((element) => {
   element.addEventListener('mouseout', (event) => {
     event.target.classList.remove('swinging');
   });
+});
+
+wolfElements.forEach((element) => {
+  element.addEventListener('mouseover', handleWolfElementClick);
 });
 
 function createRulesListElement() {
@@ -45,13 +50,21 @@ function createRulesListElement() {
 function handleSoundElementClick() {
   soundOn = !soundOn;
 
+  const music = sound.BELLA_LULLABY;
+  music.loop = true;
+  music.autoplay = true;
+
   if (soundOn) {
     soundElement.src = soundImage.SOUND_ON;
-    sound.BELLA_LULLABY.play();
+    music.pause();
   } else {
     soundElement.src = soundImage.SOUND_OFF;
-    sound.BELLA_LULLABY.pause();
+    music.play();
   }
+}
+
+function handleWolfElementClick() {
+  sound.WOLF_SOUND.play();
 }
 function handleContinueButton() {
   sound.CLICK_SOUND.play();
