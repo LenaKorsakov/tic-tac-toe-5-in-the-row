@@ -27,7 +27,7 @@ const gameOverScreenText = {
 const gameOverModalURL = {
   BELLA_WON: './img/bella-vampire.jpeg',
   EDWARD_WON: './img/bella-wedding.jpeg',
-  TIE: '../img/edward-bella-sunny.jpeg',
+  TIE: './img/edward-bella-sunny.jpeg',
 };
 
 const edwardQuotes = [
@@ -47,16 +47,16 @@ const edwardQuotes = [
 ];
 
 const sound = {
-  BELLA_LULLABY: new Audio('/music/CarterBurwell-BellasLullaby_.mp3'),
-  CLICK_SOUND: new Audio('/music/click-sound.mp3'),
-  BELLAS_MOVE: new Audio('/music/bellas-move.mp3'),
-  EDWARDS_MOVE: new Audio('/music/edvard-move.mp3'),
-  WOLF_SOUND: new Audio('/music/wolf-sound.mp3'),
+  BELLA_LULLABY: new Audio('./music/CarterBurwell-BellasLullaby_.mp3'),
+  CLICK_SOUND: new Audio('./music/click-sound.mp3'),
+  BELLAS_MOVE: new Audio('./music/bellas-move.mp3'),
+  EDWARDS_MOVE: new Audio('./music/edvard-move.mp3'),
+  WOLF_SOUND: new Audio('./music/wolf-sound.mp3'),
 };
 
 const soundImage = {
-  SOUND_ON: '/img/icon/icon-sound.png',
-  SOUND_OFF: '/img/icon/icon-no-noise.png',
+  SOUND_ON: './img/icon/icon-sound.png',
+  SOUND_OFF: './img/icon/icon-no-noise.png',
 };
 
 function randomEdwardQuote() {
