@@ -1,10 +1,3 @@
-/* GENERAL
-/* Remove the margin in all browsers. */
-
-body {
-  margin: 0;
-}
-
 /* FONTS */
 @font-face {
   font-style: normal;
@@ -49,6 +42,13 @@ body {
   --light-green: #09898a;
   --violet: #484e79;
   --white: #ebfbee;
+}
+
+/* GENERAL
+/* Remove the margin in all browsers. */
+
+body {
+  margin: 0;
 }
 
 * {
@@ -168,7 +168,7 @@ body {
   & .img__wrapper::after {
     content: 'Tic-tac-toe';
     position: absolute;
-    top: 12vh;
+    top: 15vh;
     right: 2vw;
     font-family: 'Raleway', 'Arial', sans-serif;
     font-size: 1.5rem;
