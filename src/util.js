@@ -46,6 +46,18 @@ const edwardQuotes = [
   'Do I dazzle you?',
 ];
 
+const sound = {
+  BELLA_LULLABY: new Audio('/music/CarterBurwell-BellasLullaby_.mp3'),
+  CLICK_SOUND: new Audio('/music/click-sound.mp3'),
+  BELLAS_MOVE: new Audio('/music/bellas-move.mp3'),
+  EDWARDS_MOVE: new Audio('/music/edvard-move.mp3'),
+};
+
+const soundImage = {
+  SOUND_ON: '/img/icon/icon-sound-on.png',
+  SOUND_OFF: '/img/icon/icon-mute.png',
+};
+
 function randomEdwardQuote() {
   const index = Math.floor(Math.random() * edwardQuotes.length);
 
@@ -59,4 +71,6 @@ export {
   gameOverScreenText,
   gameOverModalURL,
   randomEdwardQuote,
+  sound,
+  soundImage,
 };

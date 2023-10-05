@@ -8,6 +8,7 @@ import {
   gameOverModalURL,
   gameOverScreenText,
   randomEdwardQuote,
+  sound,
 } from './util.js';
 
 const X = 1;
@@ -28,13 +29,11 @@ gameOverModal.addEventListener('click', handleBackDropClick);
 edwardImgElement.addEventListener('click', handleEdwardImgElementClick);
 
 function firstPlayerMove(currentCell, row, col) {
-  if (gameField[row][col] === 0) {
-    gameField[row][col] = FIRST_PLAYER_MARKER;
-    currentCell.classList.add('lamb');
-    isFirstPlayerMove = false;
-  } else {
-    return;
-  }
+  sound.BELLAS_MOVE.play();
+
+  gameField[row][col] = FIRST_PLAYER_MARKER;
+  currentCell.classList.add('lamb');
+  isFirstPlayerMove = false;
 
   const firstPlayerScore = getMoveScore(gameField, row, col);
   if (firstPlayerScore === LENGTH_TO_WIN) {
@@ -50,8 +49,9 @@ function secondPlayerMove() {
     const secondPlayerMove = getBestNextMove(gameField, SECOND_PLAYER_MARKER);
 
     const [coordI, coordJ] = secondPlayerMove;
-
     gameField[coordI][coordJ] = SECOND_PLAYER_MARKER;
+
+    sound.EDWARDS_MOVE.play();
     const secondPlayerElement = document.querySelector(
       `[data-row="${coordI}"][data-col="${coordJ}"]`
     );
@@ -108,6 +108,7 @@ function changeEdwardQuote() {
 }
 
 function handleRestartButtonClick() {
+  sound.CLICK_SOUND.play();
   resetGameField();
 }
 

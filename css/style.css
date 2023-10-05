@@ -96,7 +96,7 @@ body {
 
 .container {
   --container-offset: 32px;
-  width: calc(1080px + var(--container-offset) * 2);
+  max-width: 80vw;
   margin: 0 auto;
   padding: 0 var(--container-offset);
   display: flex;
@@ -191,6 +191,15 @@ body {
   font-size: 6rem;
 }
 
+.img-sound img {
+  width: 3rem;
+  filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(130deg)
+    brightness(90%) contrast(80%);
+  position: absolute;
+  top: 8rem;
+  right: 5rem;
+}
+
 /* MAIN SCREEN */
 
 .main-screen {
@@ -254,6 +263,7 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 .cell {
   height: 50px;
   width: 50px;
@@ -351,4 +361,36 @@ body {
 
 dialog::backdrop {
   background-color: rgb(0 0 0 / 70%);
+}
+
+/* ANIMATION */
+.swinging {
+  transform-origin: top center;
+  animation-name: swing;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+@keyframes swing {
+  20% {
+    transform: rotate3d(0, 0, 1, 15deg);
+  }
+  40% {
+    transform: rotate3d(0, 0, 1, -10deg);
+  }
+  60% {
+    transform: rotate3d(0, 0, 1, 5deg);
+  }
+  70% {
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
+  80% {
+    transform: rotate3d(0, 0, 1, -5deg);
+  }
+  90% {
+    transform: rotate3d(0, 0, 1, -3deg);
+  }
+  100% {
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
 }
