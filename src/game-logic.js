@@ -123,6 +123,7 @@ function handleBackDropClick({ currentTarget, target }) {
 }
 
 function handleEdwardImgElementClick() {
+  sound.EDWARDS_MOVE.play();
   changeEdwardQuote();
 }
 
