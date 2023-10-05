@@ -21,10 +21,11 @@ let isFirstPlayerWon = false;
 
 const gameOverModal = document.querySelector('.game-over-modal');
 const restartGameButton = gameOverModal.querySelector('.btn');
-const edwardQuoteElement = document.querySelector('.edward__quote p');
+const edwardImgElement = document.querySelector('.edward__wrapper img');
 
 restartGameButton.addEventListener('click', handleRestartButtonClick);
 gameOverModal.addEventListener('click', handleBackDropClick);
+edwardImgElement.addEventListener('click', handleEdwardImgElementClick);
 
 function firstPlayerMove(currentCell, row, col) {
   if (gameField[row][col] === 0) {
@@ -101,6 +102,11 @@ function resetGameField() {
   isFirstPlayerWon = false;
 }
 
+function changeEdwardQuote() {
+  const edwardQuoteElement = document.querySelector('.edward__quote p');
+  edwardQuoteElement.textContent = randomEdwardQuote();
+}
+
 function handleRestartButtonClick() {
   resetGameField();
 }
@@ -115,6 +121,10 @@ function handleBackDropClick({ currentTarget, target }) {
   resetGameField();
 }
 
+function handleEdwardImgElementClick() {
+  changeEdwardQuote();
+}
+
 function handleGameGridClick(event) {
   const currentCell = event.target;
   const row = +currentCell.dataset.row;
@@ -125,7 +135,7 @@ function handleGameGridClick(event) {
     !currentCell.classList.contains('lamb') &&
     !currentCell.classList.contains('lion')
   ) {
-    edwardQuoteElement.textContent = randomEdwardQuote();
+    changeEdwardQuote();
     firstPlayerMove(currentCell, row, col);
 
     // in case of odd number of rows/cols

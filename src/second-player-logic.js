@@ -3,8 +3,6 @@ const X = 1;
 const O = 2;
 
 const LENGTH_TO_WIN = 5;
-const INITIAL_DEPTH = 0;
-const MAX_DEPTH = 3;
 
 const DIRECTIONS = [
   [
@@ -54,7 +52,6 @@ function getNextPosition(i, j, direction, fieldSize) {
  */
 function getMoveScore(field, i, j) {
   const playerPosition = field[i][j];
-
   let maxScore = 0;
   let numOfThreeLengthLinesWithSpaces = 0;
 
@@ -159,12 +156,7 @@ function hasNonEmptyCellsNear(i, j, field) {
  * @param {number[][]} field
  * @returns {[number, number]}
  */
-function getBestNextMove(
-  field,
-  playerMarker = X,
-  depth = INITIAL_DEPTH,
-  maxDepth = MAX_DEPTH
-) {
+function getBestNextMove(field, playerMarker = X) {
   const fieldSize = field.length;
 
   let allPossibleMoves = [];
@@ -190,72 +182,59 @@ function getBestNextMove(
     return [Math.floor(fieldSize / 2) | 0, Math.floor(fieldSize / 2) | 0];
   }
 
-  let bestNextMove = undefined;
-  let maxMoveScore = -Infinity;
-  let minOpponentScore = +Infinity;
+  let firstPlayerBestScore = -Infinity;
+  let firstPlayerBestMoves = [];
+  let opponentBestScore = -Infinity;
+  let opponentBestMoves = [];
 
   allPossibleMoves.forEach((possibleMove) => {
-    if (maxMoveScore === LENGTH_TO_WIN) {
-      return;
-    }
-
     field[possibleMove[0]][possibleMove[1]] = playerMarker;
-
-    let score = getMoveScore(field, possibleMove[0], possibleMove[1]);
-    if (score === LENGTH_TO_WIN) {
-      field[possibleMove[0]][possibleMove[1]] = empty;
-      bestNextMove = possibleMove;
-      maxMoveScore = score;
-      return;
-    }
-
-    let opponentMoveScore = 0;
-    let bestOpponentMove = undefined;
-
-    if (depth < maxDepth) {
-      bestOpponentMove = getBestNextMove(
-        field,
-        notPlayersPosition(playerMarker),
-        depth + 1,
-        maxDepth
-      );
-
-      if (bestOpponentMove) {
-        field[bestOpponentMove[0]][bestOpponentMove[1]] =
-          notPlayersPosition(playerMarker);
-        opponentMoveScore = getMoveScore(
-          field,
-          bestOpponentMove[0],
-          bestOpponentMove[1]
-        );
-        field[bestOpponentMove[0]][bestOpponentMove[1]] = empty;
-
-        if (opponentMoveScore == LENGTH_TO_WIN) {
-          score = 0.1;
-        } else if (
-          opponentMoveScore >= LENGTH_TO_WIN - 0.55 &&
-          score < LENGTH_TO_WIN - 1
-        ) {
-          score = 0.1;
-        }
-      }
-    }
-
-    if (score > maxMoveScore) {
-      maxMoveScore = score;
-      minOpponentScore = opponentMoveScore;
-      bestNextMove = possibleMove;
-    } else if (score === maxMoveScore) {
-      if (opponentMoveScore < minOpponentScore) {
-        minOpponentScore = opponentMoveScore;
-        bestNextMove = possibleMove;
-      }
-    }
-
+    let firstPlayerScore = getMoveScore(
+      field,
+      possibleMove[0],
+      possibleMove[1]
+    );
     field[possibleMove[0]][possibleMove[1]] = empty;
+
+    field[possibleMove[0]][possibleMove[1]] = notPlayersPosition(playerMarker);
+    let opponentScore = getMoveScore(field, possibleMove[0], possibleMove[1]);
+    field[possibleMove[0]][possibleMove[1]] = empty;
+
+    if (firstPlayerScore > firstPlayerBestScore) {
+      firstPlayerBestMoves = [[possibleMove[0], possibleMove[1]]];
+      firstPlayerBestScore = firstPlayerScore;
+    } else if (firstPlayerScore === firstPlayerBestScore) {
+      firstPlayerBestMoves.push([possibleMove[0], possibleMove[1]]);
+    }
+
+    if (opponentScore > opponentBestScore) {
+      opponentBestMoves = [[possibleMove[0], possibleMove[1]]];
+      opponentBestScore = opponentScore;
+    } else if (opponentScore === opponentBestScore) {
+      opponentBestMoves.push([possibleMove[0], possibleMove[1]]);
+    }
   });
 
-  return bestNextMove;
+  const myRandomMove =
+    firstPlayerBestMoves[
+      Math.floor(Math.random() * firstPlayerBestMoves.length)
+    ];
+  const opponentRandomMove =
+    opponentBestMoves[Math.floor(Math.random() * opponentBestMoves.length)];
+
+  if (firstPlayerBestScore === LENGTH_TO_WIN) {
+    return myRandomMove;
+  }
+  if (opponentBestScore === LENGTH_TO_WIN) {
+    return opponentRandomMove;
+  }
+  if (firstPlayerBestScore >= 4.49) {
+    return myRandomMove;
+  }
+  if (opponentBestScore >= 4.49) {
+    return opponentRandomMove;
+  }
+  return myRandomMove;
 }
 
 export { getBestNextMove, getMoveScore, LENGTH_TO_WIN };
