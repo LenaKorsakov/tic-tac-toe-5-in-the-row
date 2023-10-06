@@ -91,7 +91,6 @@ body {
 .container {
   --container-offset: 32px;
   max-width: 60vw;
-  max-height: 60vh;
   margin: 0 auto;
   padding: 0 var(--container-offset);
   display: flex;
@@ -144,7 +143,7 @@ body {
 
   & .quote {
     color: var(--white);
-    font-size: clamp(1.3rem, 1.5rem, 2.3rem);
+    font-size: clamp(1.3rem, 1.3vw, 2.3rem);
     font-weight: 400;
     padding: 1rem 0;
     flex: 0 0 50vw;
@@ -231,7 +230,7 @@ body {
   }
 
   & p {
-    font-size: clamp(0.8rem, 1.3rem, 2rem);
+    font-size: clamp(0.5rem, 1vw, 2.5rem);
     color: var(--white);
     flex: 1;
     line-height: 2;
@@ -352,7 +351,7 @@ body {
   & p {
     max-width: 30vw;
     text-align: center;
-    font-size: clamp(1rem, 1.3rem, 2rem);
+    font-size: clamp(1rem, 1vw, 2rem);
   }
 
   & img {
