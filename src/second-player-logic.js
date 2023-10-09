@@ -57,12 +57,14 @@ function getMoveScore(field, i, j) {
 
   DIRECTIONS.forEach((directionsPair) => {
     let lengthOfPlayersLine = 1;
-    let numberOfSpacesAfterPlayersLine = 0;
+    let numberOfDirectionsWithSpacesAfterPlayersLine = 0;
+    let totalNumberOfpacesAfterPlayersLine = 0;
     const [firstDirectionsPair, secondDirectionsPair] = directionsPair;
 
     [firstDirectionsPair, secondDirectionsPair].forEach((direction) => {
       let coordI = i;
       let coordJ = j;
+      let theFirstSpaseWasReached = false;
 
       while (true) {
         const nextPosition = getNextPosition(
@@ -75,13 +77,19 @@ function getMoveScore(field, i, j) {
           break;
         }
         const nextElement = field[nextPosition[0]][nextPosition[1]];
-        if (nextElement !== playerPosition) {
-          if (nextElement === empty) {
-            numberOfSpacesAfterPlayersLine++;
+
+        if (nextElement === playerPosition && !theFirstSpaseWasReached) {
+          lengthOfPlayersLine++;
+        } else if (nextElement === empty) {
+          if (!theFirstSpaseWasReached) {
+            numberOfDirectionsWithSpacesAfterPlayersLine++;
           }
+          theFirstSpaseWasReached = true;
+          totalNumberOfpacesAfterPlayersLine++;
+        } else {
           break;
         }
-        lengthOfPlayersLine++;
+
         coordI = nextPosition[0];
         coordJ = nextPosition[1];
       }
@@ -92,26 +100,32 @@ function getMoveScore(field, i, j) {
     }
 
     let score = lengthOfPlayersLine;
+
     if (
-      lengthOfPlayersLine < LENGTH_TO_WIN &&
-      numberOfSpacesAfterPlayersLine === 0
+      lengthOfPlayersLine + totalNumberOfpacesAfterPlayersLine <
+      LENGTH_TO_WIN
     ) {
       score = 0;
     } else if (
       lengthOfPlayersLine < LENGTH_TO_WIN &&
-      numberOfSpacesAfterPlayersLine === 2
+      numberOfDirectionsWithSpacesAfterPlayersLine === 0
+    ) {
+      score = 0;
+    } else if (
+      lengthOfPlayersLine < LENGTH_TO_WIN &&
+      numberOfDirectionsWithSpacesAfterPlayersLine === 2
     ) {
       score += 0.5;
     } else if (
       lengthOfPlayersLine < LENGTH_TO_WIN &&
-      numberOfSpacesAfterPlayersLine === 1
+      numberOfDirectionsWithSpacesAfterPlayersLine === 1
     ) {
       score += 0.25;
     }
 
     if (
       lengthOfPlayersLine === LENGTH_TO_WIN - 2 &&
-      numberOfSpacesAfterPlayersLine === 2
+      numberOfDirectionsWithSpacesAfterPlayersLine === 2
     ) {
       numOfThreeLengthLinesWithSpaces += 1;
     }
@@ -215,7 +229,20 @@ function getBestNextMove(field, playerMarker = X) {
     }
   });
 
-  const myRandomMove =
+  let overlappedMoves = [];
+  firstPlayerBestMoves.forEach((myMove) => {
+    opponentBestMoves.forEach((opponentMove) => {
+      if (myMove[0] == opponentMove[0] && myMove[1] == opponentMove[1]) {
+        overlappedMoves.push(myMove);
+      }
+    });
+  });
+
+  if (overlappedMoves.length > 0) {
+    firstPlayerBestMoves = overlappedMoves;
+  }
+
+  let myRandomMove =
     firstPlayerBestMoves[
       Math.floor(Math.random() * firstPlayerBestMoves.length)
     ];
