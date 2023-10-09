@@ -59,7 +59,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  min-width: 1366px;
+  /* max-width: 1366px; */
   min-height: 100vh;
 }
 
@@ -111,7 +111,7 @@ body {
   align-items: center;
   padding: 0.3rem 0.5rem;
   font-weight: 600;
-  font-size: 1.3rem;
+  font-size: clamp(0.4rem, 1.3vw, 2.5rem);
   line-height: 1.2;
   color: var(--white);
   letter-spacing: 0.05rem;
@@ -143,7 +143,7 @@ body {
 
   & .quote {
     color: var(--white);
-    font-size: clamp(1.3rem, 1.3vw, 2.3rem);
+    font-size: clamp(1.1vw, 1.3vw, 2.3rem);
     font-weight: 400;
     padding: 1rem 0;
     flex: 0 0 50vw;
@@ -152,7 +152,7 @@ body {
   }
 
   & .quote__author {
-    font-size: 1rem;
+    font-size: 1.2vw;
     color: var(--light-green);
   }
 
@@ -167,10 +167,10 @@ body {
   & .img__wrapper::after {
     content: 'Tic-tac-toe';
     position: absolute;
-    top: 15vh;
+    top: 8vw;
     right: 2vw;
     font-family: 'Raleway', 'Arial', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.5vw;
     font-weight: 400;
     color: var(--white);
   }
@@ -186,7 +186,7 @@ body {
   left: -1.5rem;
   top: -1rem;
   font-family: sans-serif;
-  font-size: 5rem;
+  font-size: clamp(0.5rem, 5rem, 2.5rem);
 }
 
 .img-sound img {
@@ -207,7 +207,7 @@ body {
     var(--main-color) 0%,
     var(--light-green) 100%
   );
-  padding: 2rem;
+  padding: 1vh 2vw;
 
   & .btn {
     margin: 1vw 1vh;
@@ -222,17 +222,18 @@ body {
 
   & .img__wrapper {
     flex: 0 0 auto;
-    width: 25rem;
+    width: 30vw;
   }
 
   & img {
-    max-height: 30vh;
+    max-height: 20vh;
   }
 
   & p {
-    font-size: clamp(0.5rem, 1vw, 2.5rem);
+    font-size: clamp(0.4rem, 1.3vw, 2.5rem);
     color: var(--white);
     flex: 1;
+    max-width: clamp(30vw, 50vw, 60vw);
     line-height: 2;
   }
 }
@@ -240,14 +241,17 @@ body {
 /* GAME GRID */
 
 .game__grid {
+  min-width: 250px;
+  min-height: 250px;
   --grid-width: 25vw;
   background-color: var(--dark-green);
-  max-width: var(--grid-width);
-  max-height: var(--grid-width);
+  width: var(--grid-width);
+  height: var(--grid-width);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
+  gap: none;
 }
 
 .game__wrapper {
@@ -258,12 +262,15 @@ body {
   max-height: var(--grid-width);
   justify-content: space-around;
   align-items: center;
+  gap: 3vw;
 }
 
 .cell {
-  --cell-width: 2.5vw;
-  height: var(--cell-width);
-  width: var(--cell-width);
+  --cell-width: 25px;
+  min-height: var(--cell-width);
+  min-width: var(--cell-width);
+  height: 2.5vw;
+  width: 2.5vw;
   border: 1px solid var(--light-green);
 }
 
@@ -275,14 +282,14 @@ body {
   & img {
     max-height: 20vw;
     position: absolute;
-    top: 13vh;
-    left: 7vw;
+    top: 16vh;
+    left: 10vw;
   }
 }
 
 .edward__quote {
   display: flex;
-  width: 25vw;
+  width: clamp(250px, 25vw, 50vw);
   height: 20vh;
   align-items: center;
   justify-content: center;
@@ -290,7 +297,7 @@ body {
   background-color: hsl(120, 8%, 93%, 0.75);
   color: var(--main-color);
   border: 3px ridge var(--violet);
-  font-size: 1.3rem;
+  font-size: clamp(0.8rem, 1.3vw, 2.5rem);
   font-weight: 400;
   border-radius: 9px;
 
