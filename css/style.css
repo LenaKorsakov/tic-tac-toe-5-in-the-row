@@ -201,7 +201,7 @@ body {
 /* MAIN SCREEN */
 
 .main-screen {
-  border: 1rem ridge var(--violet);
+  border: 0.8vw ridge var(--violet);
   background: linear-gradient(
     0deg,
     var(--main-color) 0%,
@@ -220,12 +220,8 @@ body {
   justify-content: space-evenly;
   align-items: center;
 
-  & .img__wrapper {
-    flex: 0 0 auto;
-    width: 30vw;
-  }
-
   & img {
+    max-width: 30vw;
     max-height: 20vh;
   }
 
@@ -296,7 +292,7 @@ body {
   flex: 0.5;
   background-color: hsl(120, 8%, 93%, 0.75);
   color: var(--main-color);
-  border: 3px ridge var(--violet);
+  border: 0.8vw ridge var(--violet);
   font-size: clamp(0.8rem, 1.3vw, 2.5rem);
   font-weight: 400;
   border-radius: 9px;
@@ -338,7 +334,7 @@ body {
     var(--light-green) 100%
   );
   color: var(--white);
-  border: 1rem ridge var(--violet);
+  border: 0.2vw ridge var(--violet);
   padding: 1vw;
 
   & .btn {
