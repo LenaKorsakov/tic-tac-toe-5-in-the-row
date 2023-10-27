@@ -18,13 +18,7 @@ To play "TWILIGHT Tic Tac Toes 5 in a Row," follow these steps:
   git@github.com:LenaKorsakov/tic-tac-toe-5-in-the-row.git
 ```
 
-2. Install dependencies:
-
-   ```
-   npm install
-   ```
-
-3. Run the application:
+2. Run the application:
 
 ```
    npm start
